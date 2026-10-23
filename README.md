@@ -4,17 +4,17 @@ Self-serve signups get $200 in free API credits. This folder answers whether tha
 
 ## Read this first
 
-- Executive summary PDF: [docs/executive-summary.pdf](docs/executive-summary.pdf)
-- Same summary in HTML: [docs/executive-summary.html](docs/executive-summary.html)
+1. **Executive summary PDF:** [docs/executive-summary.pdf](docs/executive-summary.pdf). Start here.
+2. **How this was done:** [notes/how-this-was-done.md](notes/how-this-was-done.md). Read this second.
 
-The summary is written in [executive-summary.qmd](executive-summary.qmd). It includes [\_setup.qmd](_setup.qmd), and Quarto writes the PDF and HTML into `docs/`.
+The same summary is also in HTML: [docs/executive-summary.html](docs/executive-summary.html). The summary is written in [executive-summary.qmd](executive-summary.qmd). It includes [\_setup.qmd](_setup.qmd), and Quarto writes the PDF and HTML into `docs/`.
 
 ## Layout
 
 - [data/](data/) — the 10,000 signups
 - [sql/](sql/) — the queries
 - [docs/](docs/) — the rendered PDF and HTML
-- [notes/](notes/) — the prompt, the hiring note, and the strange findings
+- [notes/](notes/) — how this was done, and the prompt
 
 ## Data and prompt
 
@@ -24,7 +24,7 @@ The summary is written in [executive-summary.qmd](executive-summary.qmd). It inc
 
 ## How this was done
 
-Worked in Cursor with the repo’s analysis rules (plain English, question headers, answer first, then evidence, appendix last). The longer note for the hiring conversation is [notes/how-this-was-done.md](notes/how-this-was-done.md).
+Worked in Cursor with the repo’s analysis rules (plain English, question headers, answer first, then evidence, appendix last). The write-up is [notes/how-this-was-done.md](notes/how-this-was-done.md), the second document to read.
 
 Python in [\_setup.qmd](_setup.qmd) loads the CSV into SQLite, runs the queries in [sql/](sql/), and draws the chart. Pandas formats the results. Quarto renders HTML and PDF. `qa_summary.py` runs the same database.
 

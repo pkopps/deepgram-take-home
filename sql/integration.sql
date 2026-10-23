@@ -1,4 +1,4 @@
--- Median spend, median days active, and buyers for each way of connecting, among accounts that called the API.
+-- Median spend, median days active, buyers, and credits used for each way of connecting, among accounts that called the API.
 WITH ranked AS (
     SELECT
         integration_method,
@@ -22,7 +22,8 @@ SELECT
         WHEN n % 2 = 1 AND days_rn = (n + 1) / 2 THEN days
         WHEN n % 2 = 0 AND days_rn IN (n / 2, n / 2 + 1) THEN days
     END) AS median_days,
-    SUM(purchased) AS bought
+    SUM(purchased) AS bought,
+    SUM(spend) AS spend
 FROM ranked
 GROUP BY integration_method
 ORDER BY CASE integration_method

@@ -2221,25 +2221,32 @@ vertical-align: -.125em;
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>No. From an acquisition and conversion perspective, the $200 credits are not working.</strong> We granted $2,000,000 in credits across 10,000 signups and got 90 buyers from it; while 8,160 out of those 10,000 accounts never used the product at all.</p>
+<p><strong>No. From a free to paid conversion perspective, the $200 credits are not working.</strong> We granted $2,000,000 in credits across 10,000 signups and got 90 buyers from it, while 8,160 out of those 10,000 accounts never used the product at all.</p>
 </div>
 </div>
+<section id="definitions" class="level3">
+<h3 class="anchored" data-anchor-id="definitions">Definitions</h3>
 <p><strong>Builders definition</strong>: Those who connect with an SDK or call the API <strong>AND</strong> return on 3 or more days <strong>OR</strong> use more than one product. They make up a small part of the signups and use 36.9% of their allotted credits on average.</p>
-<p><em>This definition is exactly the sort of thing that we would put in a semantic layer.</em></p>
-<p><strong>Insights</strong></p>
+<p><strong>Freeloaders definition</strong>: Those who used the free credits and did not buy. People who never called the API are not freeloaders. They did not engage.</p>
+<p><em>These definitions are created by me, and are exactly what we would put in a semantic layer.</em></p>
+</section>
+<section id="insights" class="level3">
+<h3 class="anchored" data-anchor-id="insights">Insights</h3>
 <ul>
 <li>Business-email accounts are 1.7% likely to buy, compared to 0.7% for personal-email accounts. Business-email accounts buy about 2.5 times as often as personal-email signups.</li>
 <li>993 of the 1,840 people who called the API did it on the day they signed up (54.0%).</li>
-<li>Speech-to-text is where most of the credits went ($26,894). The 100 heaviest accounts used $24,305, 46.6% of the $52,148 spent.</li>
+<li>Speech-to-text is where most of the credits went ($26,894). The 100 heaviest accounts used $24,305, 46.6% of the $52,148 spent. The builder path, SDK and direct API, used $51,003, 97.8% of credits used. Console-only accounts used $1,146. Accounts that never connected spent $0. After speech-to-text, Text-to-speech used $15,769, Voice agent used $7,234, and Audio intelligence used $2,251.</li>
 </ul>
-<p><strong>What the Business Should Do Instead</strong></p>
+</section>
+<section id="what-the-business-should-do-instead" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-business-should-do-instead">What the Business Should Do Instead</h3>
 <ol type="1">
 <li><strong>Give $150 at signup, not $200.</strong> The 87 people who tried the product and bought used $141 on average. This may push some users over the edge to start buying. Too much credit and many people may not buy.</li>
 <li><strong>Nudge the 163 business-email builders to the sales team, irrespective of whether they are tagged sales-qualified.</strong> 33 of business-email builders bought. Of all 79 purchases that happened on or after signup (across all groups), 48 happened quickly within 7 days.</li>
-<li><strong>AB Test the $150,</strong> Instead of giving every self signup a $150 credit, AB test $150 vs $0, or $150 vs $100 vs $0, and measure the results. We cannot say the $200 credit caused the 90 buys, but it might have helped. A test will make this more clear and answer “would they have bought anyway without the credit?”</li>
-<li><strong>Bring in more data</strong> We need to connect credits or trial usage with downstream revenue and longer-term engagement. Add post-trial spend (do users keep paying after credits run out or drop off?), the timeline between signup, credit use, and purchase, traffic source (where did they find us), and company size or sector. Tie accounts to actual paid activity beyond one-off purchases. This will let us track which users turn into long-term customers and if different kinds of credits or nudges make a difference.</li>
+<li><strong>AB Test the $150.</strong> Instead of giving every self signup a $150 credit, AB test $150 vs $0, or $150 vs $100 vs $0, and measure the results. We cannot say the $200 credit caused the 90 buys, but it might have helped. A test will make this more clear and answer “would they have bought anyway without the credit?”</li>
+<li><strong>Bring in more data.</strong> We need to connect credits or trial usage with downstream revenue and longer-term engagement. Add post-trial spend (do users keep paying after credits run out or drop off?), the timeline between signup, credit use, and purchase, traffic source (where did they find us), and company size or sector. Tie accounts to actual paid activity beyond one-off purchases. This will let us track which users turn into long-term customers and if different kinds of credits or nudges make a difference.</li>
 </ol>
-<div style="page-break-after: always;"></div>
+</section>
 </section>
 <section id="funnel" class="level2">
 <h2 class="anchored" data-anchor-id="funnel">Funnel</h2>
@@ -2263,23 +2270,118 @@ Figure 1: Signups and buyers in each group, and credits used by everyone versus
 <p><strong>Revenue.</strong> This file cannot say how much money the purchases brought in. <code>purchased</code> is yes or no, and <code>purchase_date</code> is only a date. There is no charge amount.</p>
 <p>What we can count: 79 of the 90 purchase dates fall on or after signup, so those are the buys that could have come after the $200. The buyers consumed $12,288 in credits. That is usage, not cash collected. Another $4,987 was spent above the $200 grant, across 62 accounts, and 37 of those accounts are not marked as buyers. Do not treat that $4,987 as revenue either.</p>
 <p>To get the revenue, join billing charges to these 10,000 accounts. Each charge needs the dollar amount, the date, and what it was for: a credit pack, an auto-load, or a Growth plan. Keep charges dated before signup out of the total for this offer.</p>
+</section>
+<section id="what-to-watch-going-forward-and-how-to-watch-it" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-watch-going-forward-and-how-to-watch-it">What to watch going forward, and how to watch it</h2>
+<p>Put the builder definition, the freeloader definition, and the metric/signal logic in the table below<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> into a semantic layer. Run the same counts on every new signup file (or as new data comes into our database realistically). That is how the business keeps watching these credits, and future credit and incentive offer programs, not just from this one report, even if you were to refresh it or put it on a schedule.</p>
+<p>This also makes the reporting more repeatable and less error-prone, allows for more confident and accurate reporting, and reduces the risk of misinterpretation or missed signals. It reduces the risk of one report saying one number, and another report saying another number. It helps keep definitions used for AB testing aligned between experiments. It allows non-technical users like PMs to run reports themselves. Semantic layers are immeasurably value-adding, and open tons of doors for the business.</p>
+<div class="cell" data-execution_count="4">
+<div id="tbl-watch" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-watch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 1
+</figcaption>
+<div aria-describedby="tbl-watch-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display cell-output-markdown">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Signal</th>
+<th>Now</th>
+<th>Act when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Credits used of the grant</td>
+<td>2.6% of $2,000,000</td>
+<td>This jumps. The smaller signup grant is no longer covering a quiet file.</td>
+</tr>
+<tr class="even">
+<td>Never called the API</td>
+<td>8,160 of 10,000</td>
+<td>This stays the bulk of signups. Do not hand every signup the full $200.</td>
+</tr>
+<tr class="odd">
+<td>Freeloaders (used credits, did not buy)</td>
+<td>1,753 of 1,840</td>
+<td>This grows. People are taking the credits and not paying.</td>
+</tr>
+<tr class="even">
+<td>Business-email builders who buy</td>
+<td>33 of 163</td>
+<td>This is the sales list.</td>
+</tr>
+<tr class="odd">
+<td>Buyers</td>
+<td>90 of 10,000</td>
+<td>This is the scorecard for the signup grant.</td>
+</tr>
+<tr class="even">
+<td>Tagged, then bought</td>
+<td>0 of 20</td>
+<td>Do not route anyone off the sales-qualified flag.</td>
+</tr>
+<tr class="odd">
+<td>Purchases dated before signup</td>
+<td>11 of 90</td>
+<td>Do not count these as the credit working.</td>
+</tr>
+<tr class="even">
+<td>Used at least $100 and did not buy</td>
+<td>120</td>
+<td>This grows. Heavy free use is not turning into a purchase.</td>
+</tr>
+<tr class="odd">
+<td>Builder path share of credits used</td>
+<td>97.8% of $52,148</td>
+<td>This falls. Console-only use is taking a larger share.</td>
+</tr>
+<tr class="even">
+<td>Speech-to-text share of credits used</td>
+<td>51.6% of $52,148</td>
+<td>This shifts. Another product is where the credits are going.</td>
+</tr>
+<tr class="odd">
+<td>Latest full month</td>
+<td>February has 7 purchases, versus 12–19 earlier</td>
+<td>Do not read that dip as worse conversion.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="appendix" class="level2">
 <h2 class="anchored" data-anchor-id="appendix">Appendix</h2>
 <section id="callouts" class="level3">
 <h3 class="anchored" data-anchor-id="callouts">Callouts</h3>
-<p><strong>Buy before signup?:</strong> 11 of the 90 purchases are dated <strong>before</strong> signup, so they are not part of the expected funnel: 1. Signup, 2. Try the product using the $200 credit, 3. Buy.</p>
+<p><strong>Buy before signup?</strong> 11 of the 90 purchases are dated <strong>before</strong> signup, so they are not part of the expected funnel: 1. Signup, 2. Try the product using the $200 credit, 3. Buy.</p>
 <p><strong>Pre-signup sales-qualified tags.</strong> 16 of the 20 sales-qualified tags are dated before signup. A CRM join would show whether those people were already customers, or already in a sales conversation, before this account existed. Until that join, those tags are not evidence that the $200 worked.</p>
 <p><strong>Recent signups.</strong> February has 7 purchases, versus 12–19 earlier. Those accounts have had less time to buy, not because newer signups convert worse.</p>
 </section>
 <section id="qa" class="level3">
 <h3 class="anchored" data-anchor-id="qa">QA</h3>
-<p><strong>Data quality.</strong> The file is clean enough for the big picture: 10,000 unique accounts, the monthly spend list adds up, and no API call is dated before signup. It is not clean enough to treat every purchase as the credit working. 3 buyers never called the API. 29 called the API only after the purchase date. March is 45 signups, all on 1 Mar 2026, so do not read that month as a drop.</p>
+<p><strong>Data quality.</strong> The file is clean enough for the big picture: 10,000 unique accounts, the monthly spend list adds up, and no API call is dated before signup. 3 buyers never called the API. 29 called the API only after the purchase date. March is 45 signups, all on 1 Mar 2026. The file ends that day, so that month is one day, not a full month. The other months have 1,544–1,751 signups each. Do not read that short month as a drop.</p>
 </section>
 </section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Including but not limited to.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

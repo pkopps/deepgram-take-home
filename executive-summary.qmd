@@ -64,6 +64,16 @@ biz_build_n = int(biz_build.people)
 biz_build_bought = int(biz_build.bought)
 top_prod_name = PRODUCT_NAMES.get(top_prod.primary_product, top_prod.primary_product)
 build_util = pct(spend_build, n_build * GRANT)
+how = q("integration").set_index("method")
+path_spend = float(how.reindex(["sdk", "direct_api"])["spend"].sum())
+console_spend = float(how.loc["console_only", "spend"]) if "console_only" in how.index else 0
+idle_spend = float(spent) - path_spend - console_spend
+path_share = pct(path_spend, spent)
+other_bits = [
+    f"{PRODUCT_NAMES.get(row.primary_product, row.primary_product)} used {money(row.spend)}"
+    for row in prod.iloc[1:].itertuples(index=False)
+]
+other_prod_line = ", ".join(other_bits[:-1]) + f", and {other_bits[-1]}" if len(other_bits) > 1 else (other_bits[0] if other_bits else "")
 
 sql_bought_n = int(nar.sql_bought)
 sql_then_bought_n = int(nar.sql_buy_after_tag)
@@ -92,26 +102,45 @@ feb_line = (
     f"{month_now}. "
     "Those accounts have had less time to buy, not because newer signups convert worse."
 )
+freeload_n = n_act - (n_buy - buy_no_act)
 watch = pd.DataFrame({
     "Signal": [
         "Credits used of the grant",
         "Never called the API",
+        "Freeloaders (used credits, did not buy)",
         "Business-email builders who buy",
+        "Buyers",
         "Tagged, then bought",
+        "Purchases dated before signup",
+        "Used at least $100 and did not buy",
+        "Builder path share of credits used",
+        "Speech-to-text share of credits used",
         "Latest full month",
     ],
     "Now": [
         f"{pct(spent, granted)} of {money(granted)}",
         f"{num(n_never)} of {num(n)}",
+        f"{num(freeload_n)} of {num(n_act)}",
         f"{num(biz_build_bought)} of {num(biz_build_n)}",
+        f"{num(n_buy)} of {num(n)}",
         f"{num(sql_then_bought_n)} of {num(n_sql)}",
+        f"{num(purch_before)} of {num(n_buy)}",
+        f"{num(nar.heavy_nobuy)}",
+        f"{path_share} of {money(spent)}",
+        f"{pct(top_prod.spend, spent)} of {money(spent)}",
         month_now,
     ],
     "Act when": [
         "This jumps. The smaller signup grant is no longer covering a quiet file.",
         f"This stays the bulk of signups. Do not hand every signup the full {money(GRANT)}.",
+        "This grows. People are taking the credits and not paying.",
         "This is the sales list.",
+        "This is the scorecard for the signup grant.",
         "Do not route anyone off the sales-qualified flag.",
+        "Do not count these as the credit working.",
+        "This grows. Heavy free use is not turning into a purchase.",
+        "This falls. Console-only use is taking a larger share.",
+        "This shifts. Another product is where the credits are going.",
         "Do not read that dip as worse conversion.",
     ],
 })
@@ -149,27 +178,29 @@ else:
 **Question:** Are the $200 credits working? Are they being used? Are we attracting freeloaders or builders with them?
 
 ::: {.callout-note title="Answer"}
-**No. From an acquisition and conversion perspective, the $200 credits are not working.** We granted `{python} money(granted)` in credits across `{python} num(n)` signups and got `{python} num(n_buy)` buyers from it; while `{python} num(n_never)` out of those `{python} num(n)` accounts never used the product at all.
+**No. From a free to paid conversion perspective, the $200 credits are not working.** We granted `{python} money(granted)` in credits across `{python} num(n)` signups and got `{python} num(n_buy)` buyers from it, while `{python} num(n_never)` out of those `{python} num(n)` accounts never used the product at all.
 :::
+
+### Definitions
 
 **Builders definition**: Those who connect with an SDK or call the API **AND** return on 3 or more days **OR** use more than one product. They make up a small part of the signups and use `{python} build_util` of their allotted credits on average.
 
-*This definition is exactly the sort of thing that we would put in a semantic layer.*
+**Freeloaders definition**: Those who used the free credits and did not buy. People who never called the API are not freeloaders. They did not engage.
 
-**Insights**
+*These definitions are created by me, and are exactly what we would put in a semantic layer.*
+
+### Insights
 
 - Business-email accounts are `{python} biz_buy_rate` likely to buy, compared to `{python} per_buy_rate` for personal-email accounts. Business-email accounts buy about `{python} buy_multiplier` times as often as personal-email signups.
 - `{python} num(lags.start_same_day)` of the `{python} num(lags.starters)` people who called the API did it on the day they signed up (`{python} pct(lags.start_same_day, lags.starters)`).
-- `{python} top_prod_name` is where most of the credits went (`{python} money(top_prod.spend)`). The 100 heaviest accounts used `{python} money(top.top_100)`, `{python} pct(top.top_100, spent)` of the `{python} money(spent)` spent.
+- `{python} top_prod_name` is where most of the credits went (`{python} money(top_prod.spend)`). The 100 heaviest accounts used `{python} money(top.top_100)`, `{python} pct(top.top_100, spent)` of the `{python} money(spent)` spent. The builder path, SDK and direct API, used `{python} money(path_spend)`, `{python} path_share` of credits used. Console-only accounts used `{python} money(console_spend)`. Accounts that never connected spent `{python} money(idle_spend)`. After speech-to-text, `{python} other_prod_line`.
 
-**What the Business Should Do Instead**
+### What the Business Should Do Instead
 
 1. **Give `{python} money(signup_offer)` at signup, not `{python} money(GRANT)`.** The `{python} num(try_buy_n)` people who tried the product and bought used `{python} money(try_buy_mean)` on average. This may push some users over the edge to start buying. Too much credit and many people may not buy.
 2. **Nudge the `{python} num(biz_build_n)` business-email builders to the sales team, irrespective of whether they are tagged sales-qualified.** `{python} num(biz_build_bought)` of business-email builders bought. Of all `{python} num(n_buy_after)` purchases that happened on or after signup (across all groups), `{python} num(lags.buy_within_7)` happened quickly within 7 days.
-3. **AB Test the `{python} money(signup_offer)`,** Instead of giving every self signup a `{python} money(signup_offer)` credit, AB test `{python} money(signup_offer)` vs $0, or `{python} money(signup_offer)` vs $100 vs $0, and measure the results. We cannot say the `{python} money(GRANT)` credit caused the `{python} num(n_buy)` buys, but it might have helped. A test will make this more clear and answer "would they have bought anyway without the credit?"
-4. **Bring in more data** We need to connect credits or trial usage with downstream revenue and longer-term engagement. Add post-trial spend (do users keep paying after credits run out or drop off?), the timeline between signup, credit use, and purchase, traffic source (where did they find us), and company size or sector. Tie accounts to actual paid activity beyond one-off purchases. This will let us track which users turn into long-term customers and if different kinds of credits or nudges make a difference.
-
-{{< pagebreak >}}
+3. **AB Test the `{python} money(signup_offer)`.** Instead of giving every self signup a `{python} money(signup_offer)` credit, AB test `{python} money(signup_offer)` vs $0, or `{python} money(signup_offer)` vs $100 vs $0, and measure the results. We cannot say the `{python} money(GRANT)` credit caused the `{python} num(n_buy)` buys, but it might have helped. A test will make this more clear and answer "would they have bought anyway without the credit?"
+4. **Bring in more data.** We need to connect credits or trial usage with downstream revenue and longer-term engagement. Add post-trial spend (do users keep paying after credits run out or drop off?), the timeline between signup, credit use, and purchase, traffic source (where did they find us), and company size or sector. Tie accounts to actual paid activity beyond one-off purchases. This will let us track which users turn into long-term customers and if different kinds of credits or nudges make a difference.
 
 ## Funnel
 
@@ -232,13 +263,27 @@ What we can count: `{python} num(n_buy_after)` of the `{python} num(n_buy)` purc
 
 To get the revenue, join billing charges to these `{python} num(n)` accounts. Each charge needs the dollar amount, the date, and what it was for: a credit pack, an auto-load, or a Growth plan. Keep charges dated before signup out of the total for this offer.
 
+## What to watch going forward, and how to watch it
+
+Put the builder definition, the freeloader definition, and the metric/signal logic in the table below[^signals] into a semantic layer. Run the same counts on every new signup file (or as new data comes into our database realistically). That is how the business keeps watching these credits, and future credit and incentive offer programs, not just from this one report, even if you were to refresh it or put it on a schedule. 
+
+This also makes the reporting more repeatable and less error-prone, allows for more confident and accurate reporting, and reduces the risk of misinterpretation or missed signals. It reduces the risk of one report saying one number, and another report saying another number. It helps keep definitions used for AB testing aligned between experiments. It allows non-technical users like PMs to run reports themselves. Semantic layers are immeasurably value-adding, and open tons of doors for the business.
+
+```{python}
+#| label: tbl-watch
+# Show the watch list: the current count and when to act on it.
+md_table(watch)
+```
+
+[^signals]: Including but not limited to.
+
 {{< pagebreak >}}
 
 ## Appendix
 
 ### Callouts
 
-**Buy before signup?:** `{python} num(purch_before)` of the `{python} num(n_buy)` purchases are dated **before** signup, so they are not part of the expected funnel: 1. Signup, 2. Try the product using the `{python} money(GRANT)` credit, 3. Buy.
+**Buy before signup?** `{python} num(purch_before)` of the `{python} num(n_buy)` purchases are dated **before** signup, so they are not part of the expected funnel: 1. Signup, 2. Try the product using the `{python} money(GRANT)` credit, 3. Buy.
 
 **Pre-signup sales-qualified tags.** `{python} num(sql_before)` of the `{python} num(n_sql)` sales-qualified tags are dated before signup. A CRM join would show whether those people were already customers, or already in a sales conversation, before this account existed. Until that join, those tags are not evidence that the `{python} money(GRANT)` worked.
 
