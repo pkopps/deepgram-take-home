@@ -4,6 +4,7 @@ cohort.sqlite
 *.pyc
 __pycache__/
 .matplotlib/
+figures/
 docs/*_files/
 
 /.quarto/
