@@ -12,7 +12,7 @@ I added an Appendix section with some callouts about the data and QA thresholds.
 
 I downloaded a personal version of Cursor, installed Quarto package (my go to for pdf or html based analysis and reporting).
 
-Secondly I created a series of rules (some upfront, others mid-flight that I forgot about). Those rules are what that chat had to follow. Some were set up front, and some mid-flight.
+Secondly I created a series of rules (some upfront, others mid-flight that I forgot about). Those rules are what that chat had to follow.
 
 ### How the report is written
 
@@ -27,16 +27,6 @@ Note: I have others but they don't pertain here.
 The initial plan was to load the CSV into SQLite, put the cuts in SQL, and write one executive summary in Quarto for a VP. Answer first, then insights and what to do next, then the funnel on page 2, then an appendix for the date checks and QA. That is the plan I executed.
 
 I added the CSV data to a SQLite DB to closer mimic a production environment. If you want a semantic layer, the join, business, etc. logic should be written in SQL I would recommend.
-
-## How the report is laid out
-
-From here I begin the analysis. The audience is VP, reporting back to the board. That means straight answer, he or she can understand, without reading or digging for it.
-
-That said, Executive Summary has an eye drawing box that with the question and the answer (in the box).
-
-From there, there are additional insights, and then recommendations on what to do next.
-
-Moving on to page 2, there are visuals and funnel-related information present. I talk about limitation with that data in terms of spend amounts, as well as sales team role here.
 
 ## What I did not do
 
