@@ -1,0 +1,25 @@
+project:
+  type: default
+  output-dir: docs
+  render:
+    - executive-summary.qmd
+
+execute:
+  echo: false
+  warning: false
+
+jupyter: python3
+
+format:
+  html:
+    toc: false
+    number-sections: false
+    embed-resources: true
+    theme: cosmo
+    title-block-banner: false
+  typst:
+    toc: false
+    papersize: us-letter
+    margin:
+      x: 0.8in
+      y: 0.8in

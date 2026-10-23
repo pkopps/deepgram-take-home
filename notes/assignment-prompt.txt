@@ -1,0 +1,38 @@
+Deepgram
+
+Here’s the setup:
+You just joined Deepgram as the founding product analyst. Your VP of Product sends you a dataset of
+self-serve signups and a question she’s been thinking about:
+“We give every self-serve signup $200 in free API credits. The board wants to know if that’s working.
+Here’s a dataset of 10K signups. Something I’ve been wondering about:
+We’ve got 10K signups and $200 in free credits each. Are we attracting builders or freeloaders? Where
+is all that credit spend going?
+Start there and see where the data takes you. I want to know what you’d recommend we do — and what
+else you think we should be looking at.”
+Attached: deepgram_plg_cohort-analysttakehome.csv — 10,000 self-serve signups over 6 months.
+THE DATASET
+Field Description
+user_id Unique identifier
+signup_date Account creation date
+email_domain Domain used at signup
+email_type business or personal
+first_api_call_date Date of first API request (blank if never used)
+total_credit_spend_usd Total free credits consumed
+days_active Distinct days with API usage
+primary_product Most-used product: stt, tts, voice_agent, audio_intelligence
+products_used Comma-separated list of all Deepgram products tried
+integration_method sdk, direct_api, console_only, or none
+purchased Did they become a paying customer?
+purchase_date Date of first purchase (blank if never; can precede signup)
+became_sql Tagged as Sales Qualified Lead?
+sql_date Date tagged as SQL (blank if not; can precede signup)
+monthly_usage_pattern JSON array of monthly credit spend
+
+Tools policy: Use whatever you want — Claude, ChatGPT, Cursor, Copilot, Python, R, Hex, whatever you
+actually work with. We want to see how you think and how you work. If you use AI tools, tell us how.
+Submit your work as a GitHub repo or zip file by replying to this email or through the provided
+submission link.
+How we’ll evaluate:
+This assessment is the first step in our interview process. We’re using it to determine whether to move
+forward to interviews. There’s no single right answer. We’re evaluating how you think and how you work.
+We look forward to seeing what you come up with!

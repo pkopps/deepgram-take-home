@@ -1,0 +1,29 @@
+---
+description: Do not write thinking-out-loud or process commentary in PM reports.
+alwaysApply: true
+---
+
+# No thinking out loud
+
+PMs want the finding, not a tour of how the document is organized or how you chose to write it.
+
+Do not explain the report to the reader. Do not narrate methods policy, tone, or section purpose.
+
+Forbidden patterns:
+
+- "This appendix is the only place we name methods."
+- "The body of the report stays in plain English."
+- "As mentioned above", "we will now", "in this section we", "before we dive in".
+- Staging the analysis ("first we look at X, then we consider Y").
+
+```markdown
+# ❌ BAD
+This appendix is the only place we name methods. The body of the report stays in plain English.
+
+**Funnel rates.** A funnel is a headcount at each step...
+
+# ✅ GOOD
+**Funnel rates.** A funnel is a headcount at each step...
+```
+
+Start the appendix with the first concept. If a sentence is about the writing, cut it.

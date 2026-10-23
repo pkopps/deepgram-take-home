@@ -1,0 +1,21 @@
+---
+description: Do not repeat a finding that an earlier section already states.
+globs: "**/*.{qmd,md,Rmd}"
+alwaysApply: true
+---
+
+# No redundant sections
+
+If a later section answers the same question as an earlier one, delete the later section.
+
+A section is redundant when a reader who already read the earlier one learns no new decision. Restating the same headcount, the same chart, or the same recommendation in a new header does not count as new.
+
+Keep a later section only when it adds a fact that changes what to do, or a cut the earlier section does not show. One supporting number can stay as a sentence in the section that uses it. It does not get its own header.
+
+```markdown
+# ❌ BAD
+The summary already says 8,160 never start. A later section asks "are we attracting builders?" and answers with the same 8,160, the same chart, and the same "not freeloading" line.
+
+# ✅ GOOD
+The summary states that finding once. The next section starts at the next question, such as where the credits went.
+```

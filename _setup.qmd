@@ -1,0 +1,70 @@
+```{python}
+#| label: setup
+# Load the signup file, set the chart style, and keep the headline counts the summary prints.
+import os
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from IPython.display import Markdown, display
+
+import db
+
+os.environ.setdefault("MPLCONFIGDIR", str(Path(".").resolve() / ".matplotlib"))
+Path(".matplotlib").mkdir(exist_ok=True)
+
+plt.rcParams.update({
+    "figure.facecolor": "white",
+    "axes.facecolor": "white",
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "axes.grid": False,
+    "font.size": 10,
+})
+
+GRANT = 200
+q = db.q
+
+# Turn a dataframe into a markdown table and show it in the report.
+def md_table(frame):
+    cols = [str(c) for c in frame.columns]
+    lines = [
+        "| " + " | ".join(cols) + " |",
+        "| " + " | ".join(["---"] * len(cols)) + " |",
+    ]
+    for row in frame.itertuples(index=False):
+        lines.append("| " + " | ".join(str(v) for v in row) + " |")
+    display(Markdown("\n".join(lines)))
+
+# Format a dollar amount with no cents.
+def money(x):
+    return f"${x:,.0f}"
+
+# Format a share as a percent. Show an em dash when the denominator is zero.
+def pct(num, den):
+    if den == 0:
+        return "—"
+    return f"{100 * num / den:.1f}%"
+
+# Pull the headline totals for the cohort from the "totals" SQL query.
+totals = q("totals").iloc[0]
+n = int(totals.n)
+n_act = int(totals.n_act)
+n_buy = int(totals.n_buy)
+n_sql = int(totals.n_sql)
+spent = float(totals.spent)
+granted = n * GRANT
+n_never = int(totals.n_never)
+n_tried = int(totals.n_tried)
+n_build = int(totals.n_build)
+buy_build = int(totals.buy_build)
+spend_build = float(totals.spend_build)
+over200 = int(totals.over200)
+purch_before = int(totals.purch_before)
+sql_before = int(totals.sql_before)
+sql_no_buy = int(totals.sql_no_buy)
+buy_no_act = int(totals.buy_no_act)
+n_buy_after = int(totals.n_buy_after)
+mar = int(totals.mar)
+first_after_buy = int(totals.call_after_buy)
+```

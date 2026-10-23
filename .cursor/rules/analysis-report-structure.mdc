@@ -1,0 +1,31 @@
+---
+description: Ad hoc analysis reports use a TOC, question headers, answer-first, then evidence and caveats.
+globs: "**/*.{qmd,md,Rmd}"
+alwaysApply: true
+---
+
+# Report structure
+
+Every ad hoc analysis:
+
+1. Table of contents.
+2. Each section header is a **question** prefixed with `Q:`.
+3. The next line is the **answer**, starting with bold `A:` (one or two sentences).
+4. Then charts and tables that show how you got there.
+5. Call out warnings in plain English. If a likely range includes both a loss and a gain, say so and do not treat it as a real difference.
+
+```markdown
+# ❌ BAD
+## Conversion analysis
+SDK users convert at 4.2% vs 0.8% for console (95% CI 1.1–5.4pp).
+
+# ✅ GOOD
+## Q: Do SDK users buy more often than console users?
+**A:** Yes. About 4 in 100 SDK users buy, vs under 1 in 100 console users.
+
+[table / chart]
+
+**Warning:** Only 90 people bought in the whole file. Splitting them into many slices makes the rates jump around. Do not treat a 1-point gap as a decision.
+```
+
+Do not put methods before the answer. Methods live after the answer, as evidence, or in the appendix.

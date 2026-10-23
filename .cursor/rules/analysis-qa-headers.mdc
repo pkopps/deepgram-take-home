@@ -1,0 +1,21 @@
+---
+description: Question headers use Q: prefix; the next line is a bold A: answer.
+globs: "**/*.{qmd,md,Rmd}"
+alwaysApply: true
+---
+
+# Q: / A: section labels
+
+Every question-style header starts with `Q:`. The next line starts with bold `A:`, then the answer.
+
+Do not put `Q:` on titles that are not questions (Executive Summary, Appendix).
+
+```markdown
+# ❌ BAD
+## Are we attracting builders or people who never intended to build?
+Mostly people who never start.
+
+# ✅ GOOD
+## Q: Are we attracting builders or people who never intended to build?
+**A:** Mostly people who never start.
+```

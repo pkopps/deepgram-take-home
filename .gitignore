@@ -1,0 +1,11 @@
+.venv/
+cohort.sqlite
+.quarto/
+*.pyc
+__pycache__/
+.matplotlib/
+docs/*_files/
+
+/.quarto/
+
+**/*.quarto_ipynb

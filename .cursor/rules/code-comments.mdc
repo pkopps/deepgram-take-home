@@ -1,0 +1,61 @@
+---
+description: Comment each function, each Quarto chunk, and each SQL query.
+globs: "**/*.{py,qmd,sql}"
+alwaysApply: false
+---
+
+# Code comments
+
+Comment the unit, not the line. One short sentence on what it does. Plain words. No comment that restates the next line.
+
+## Functions
+
+Put one `#` comment on the line above `def`. Say what the function returns or changes.
+
+```python
+# ❌ BAD
+def money(x):
+    # format x
+    return f"${x:,.0f}"
+
+# ✅ GOOD
+# Format a dollar amount with no cents.
+def money(x):
+    return f"${x:,.0f}"
+```
+
+## Quarto chunks
+
+One comment at the top of the chunk, after the `#|` options. That comment covers the chunk. Functions inside the chunk still get their own comment. Do not comment every line.
+
+````
+# ❌ BAD
+```{python}
+#| label: tbl-watch
+# call md_table
+# pass watch
+md_table(watch)
+```
+
+# ✅ GOOD
+```{python}
+#| label: tbl-watch
+# Show the watch list: the current count and when to act on it.
+md_table(watch)
+```
+````
+
+## SQL
+
+One `--` line at the top of the file saying what the query returns. Do not comment each column.
+
+```sql
+-- ❌ BAD
+SELECT COUNT(*) AS n  -- count the rows
+
+-- ✅ GOOD
+-- One row of headline counts: signups, buyers, spend, and the date problems.
+SELECT COUNT(*) AS n
+```
+
+Skip generated files under `docs/` and `*_files/`.

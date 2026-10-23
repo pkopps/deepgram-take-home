@@ -1,0 +1,28 @@
+---
+description: Plain English for PM-facing analysis. No jargon, no AI fluff.
+alwaysApply: true
+---
+
+# Plain language for analysis
+
+Audience is project managers. Write like a colleague explaining a finding in a meeting.
+
+## Voice
+
+- Short sentences. Concrete numbers. Then what to do.
+- Name the person and the thing. "Sales" can mean the team, the process, or revenue. Write "the sales team." If a shorter phrase could mean two things, use the words that pick one.
+- Forbidden in the body: p-value, statistically significant, coefficient, ATE, CI, heteroskedasticity, regression, confounder, propensity, likelihood, Bayesian, null hypothesis.
+- Forbidden fluff: "it is important to note", "leverage", "robust insights", "unlock value", "holistic", "in today's landscape", "delve".
+
+```markdown
+# ❌ BAD
+Activation is significantly higher (p<0.05) among SDK users, leveraging a robust signal.
+
+# ❌ ALSO BAD
+Send them to sales. The split shows up later.
+
+# ✅ GOOD
+People who use the SDK buy more often (4 in 100 vs 1 in 100). Have the sales team call those accounts this week.
+```
+
+If a number is too shaky to act on, say "too close to call" or "too few people to trust," not "underpowered."

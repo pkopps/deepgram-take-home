@@ -1,0 +1,26 @@
+-- One row of headline counts: signups, buyers, spend, and the date problems.
+SELECT
+    COUNT(*) AS n,
+    SUM(activated) AS n_act,
+    SUM(purchased) AS n_buy,
+    SUM(sql_flag) AS n_sql,
+    SUM(spend) AS spent,
+    SUM(CASE WHEN cohort = 'Never started' THEN 1 ELSE 0 END) AS n_never,
+    SUM(CASE WHEN cohort = 'Tried it' THEN 1 ELSE 0 END) AS n_tried,
+    SUM(CASE WHEN cohort = 'Building' THEN 1 ELSE 0 END) AS n_build,
+    SUM(CASE WHEN cohort = 'Building' AND purchased = 1 THEN 1 ELSE 0 END) AS buy_build,
+    SUM(CASE WHEN cohort = 'Building' THEN spend ELSE 0 END) AS spend_build,
+    SUM(CASE WHEN spend > 200 THEN 1 ELSE 0 END) AS over200,
+    SUM(CASE WHEN purchased = 1 AND purchase_dt < signup THEN 1 ELSE 0 END) AS purch_before,
+    SUM(CASE WHEN sql_flag = 1 AND sql_dt < signup THEN 1 ELSE 0 END) AS sql_before,
+    SUM(CASE WHEN sql_flag = 1 AND purchased = 0 THEN 1 ELSE 0 END) AS sql_no_buy,
+    SUM(CASE WHEN purchased = 1 AND activated = 0 THEN 1 ELSE 0 END) AS buy_no_act,
+    SUM(bought_after_signup) AS n_buy_after,
+    SUM(CASE WHEN signup_month = '2026-03' THEN 1 ELSE 0 END) AS mar,
+    SUM(CASE WHEN spend > 200 THEN spend - 200 ELSE 0 END) AS spend_above_grant,
+    SUM(CASE WHEN spend < 200 THEN 200 - spend ELSE 0 END) AS unused_grant,
+    SUM(CASE WHEN sql_flag = 1 AND sql_dt IS NOT NULL AND sql_dt >= signup THEN 1 ELSE 0 END) AS sql_after,
+    SUM(CASE WHEN first_call IS NOT NULL AND purchase_dt IS NOT NULL AND first_call > purchase_dt THEN 1 ELSE 0 END) AS call_after_buy,
+    MIN(signup) AS first_signup,
+    MAX(signup) AS last_signup
+FROM accounts;

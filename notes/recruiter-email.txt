@@ -1,0 +1,26 @@
+Hi Patrick,
+ 
+Thank you for sharing your availability for our recruiter call!
+ 
+I've just sent over a meeting invite for our chat. Simultaneously, I'd like to move you into the next step of our process which is a Take-Home Assessment that you can complete at any time.
+ 
+ 
+I wanted to share a bit more context on the Take-Home Assessment so you understand what we're hoping to evaluate and why we designed it this way:
+At a high level, the exercise is meant to simulate the type of thinking required in the role. We're not simply looking for someone who can analyze a dataset or build dashboards. The goal of the Decision Intelligence Engineer role is to help build what we call the "Intelligence Layer" at Deepgram- systems that continuously monitor the business, identify meaningful signals, and surface insights that leadership can act on quickly.
+This is intentionally a short exercise (~2 hours), so we're not looking for production-level engineering or extensive polish. Clear thinking, good prioritization, and pragmatic decisions matter the most.
+ 
+Feel free to use any tools you'd normally rely on, including AI tools- we view that as a strength, not a limitation.
+ 
+How to submit:
+Please include a PDF executive summary of your findings and recommendations. This is the first item that gets reviewed in your submission.
+ 
+If you'd like to share your work as a GitHub repository, please keep it private and add our hiring manager, Aaron Geerlings, as a collaborator [https://github.com/Ageerlings].
+ 
+Please let me know if any questions come up as you work through it, and thanks again for taking the time to engage with the exercise.
+ 
+Here is the take-home submission link as well, feel free to submit here directly, or email me:
+https://you.ashbyhq.com/Deepgram/assignment/8714bd4c-2072-4af1-9ae0-81b0e31667bd
+ 
+Let me know if you have any questions- and thank you again for taking the time!
+ 
+Best,

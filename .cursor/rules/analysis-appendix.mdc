@@ -1,0 +1,22 @@
+---
+description: End every analysis with a plain-English appendix that explains methods used.
+alwaysApply: true
+---
+
+# Analysis appendix
+
+Every report ends with an **Appendix** that explains any method you used, as if the reader has never heard the term.
+
+Pattern (use this shape even when the method is not matching):
+
+- What two (or more) groups you made.
+- What you tried to make similar, if anything.
+- What outcome you were trying to measure (usually money or staying).
+- When you would use this because a real experiment is not available.
+
+```markdown
+# ✅ GOOD (example the team uses)
+Propensity Score Matching creates two groups: people who did the thing, and people who did not. That often also splits engaged vs less engaged people. We then make those two groups look as similar as possible except for the thing whose impact we want to measure, usually revenue or retention. We use this when an experiment is not an option.
+```
+
+Name the method once in the appendix. Keep the body of the report free of the term. If you did not use a method, still explain funnel rates, small counts, and "this was not an experiment" in the same simple style.
