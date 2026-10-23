@@ -1,31 +1,34 @@
-# How this was done
+# How I did this analysis
 
-This note is for the hiring conversation. It is not part of the board report. The report answers the VP's question. This file says how that report was built.
+I downloaded a personal version of Cursor, installed Quatro package (my favorite for pdf or html based analysis).
 
-## The prompt
+Secondly I created a series of rules (some upfront, other mid-flight that I forgot about). Those rules are:
 
-The VP asked three things: are the $200 credits attracting builders or freeloaders, where did the credit spend go, and what should we change. A later email said the first file a reviewer opens should be a PDF executive summary of findings and recommendations. Clear decisions mattered more than a dashboard or a production system.
+## How the report is written
 
-The executive summary is the report. It states the decision, the actions, the chart, and the checks on the dates. The watchlist is the Intelligence Layer in miniature: the same counts, run again on the next signup file, with an action if a count moves.
+- **Plain language.** Short sentences, a number, then what to do. No statistics jargon and no filler.
+- **No redundancy.** If a later section repeats an earlier one, delete the later section.
+- **No thinking out loud.** Do not narrate the document, the tone, or the outline.
+- **Appendix.** Name a method only there, in everyday words. This report did not use one, so the appendix explains the funnel and that this was not an experiment.
 
-## Cursor
+## How the code is commented
 
-The report was written in Cursor, in this repo, with Quarto. `executive-summary.qmd` is the summary. It includes `_setup.qmd`, which loads and labels the 10,000 rows. `quarto render` writes `docs/executive-summary.pdf` and `docs/executive-summary.html`.
+- **Code comments.** One comment above each function, one comment at the top of each Quarto chunk, and one line at the top of each SQL file saying what the query returns.
 
-The CSV in `data/` is loaded into SQLite. The cuts live in `sql/` and are rerun from there. Pandas still draws the charts and formats the tables. `qa_summary.py` uses the same database.
+Note: I have other but they pertain here.
 
-Cursor drafted and revised the text and the charts. Patrick set the questions, rejected wording that drifted, and decided what the summary was allowed to lead with. Examples: the first sentence stays "Answer: No, the $200 credits are not working." Dollar caveats and the expiration question stay behind that sentence. The 8,160 people who never called the API are described as not engaging, not as freeloaders.
+I added the CSV data to a SQLite DB to closer mimic a production environment. If you want a semantic layer, the join, business, etc. logic should be written in SQL I would recommend.
 
-## Rules in the repo
+From here I begin the analysis. The audience is VP, reporting back to the board. That means straight answer, he or she can understand, without reading or digging for it.
 
-Five rules in `.cursor/rules/` apply to every edit. They exist so the report sounds like a colleague in a meeting, not like a model writing about its own writing.
+That said, Executive Summary has an eye drawing box that with the question and the answer (in the box).
 
-- **Plain language.** Short sentences, a number, then what to do. No p-values, confidence intervals, regression words, or filler ("leverage," "robust insights," "delve"). If a count is too small to act on, say "too few people to trust."
-- **No self-commentary.** Do not narrate the document. Cut "as mentioned above," "we will now," "in this section," and any sentence about the tone or the outline. The reader gets the finding.
-- **Question, then answer.** Each section header starts with `Q:`. The next line is `A:` in one or two sentences. Charts and tables come after the answer. The Executive Summary and the Appendix are not questions, so they do not get a `Q:`.
-- **Warnings in plain English.** If a gap could go either way, say so and do not treat it as a decision.
-- **Appendix last.** Name a method only there, in everyday words. This report did not use a matching model. The appendix says why: everyone got $200, so this was not an experiment.
+From there, there are additional insights, and then recommendations on what to do next.
 
-## What we refused to claim
+Moving on to page 2, their are visuals and funnel related information present. I talk about limitation with that data in terms of spend amounts, as well as sales team role here.
 
-Everyone in the file got $200. The report does not say the credits caused the 90 buys. It separates unused grant from credits actually used, and it says the file has no customer payments and no expiration date. The sales-qualified field is mostly dated before signup, so it is not the scorecard.
+Finally I added an Appendix section with some callouts about the data and QA thresholds.
+
+## What I did not do
+
+I did not create a semantic layer. Unless I misread the prompt I don't believe I was supposed to.

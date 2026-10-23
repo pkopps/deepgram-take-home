@@ -120,7 +120,10 @@ thin = months[months.signups < months.signups.median() * 0.5].sort_values("dt")
 if len(thin) and int(thin.signups.sum()) == int(nar.signups_on_last_day):
     edge_line = (
         f"{thin.iloc[-1]['dt'].strftime('%B')} is {int(thin.signups.sum()):,} signups, "
-        f"all on {nice(totals.last_signup)}, so do not read that month as a drop."
+        f"all on {nice(totals.last_signup)}. "
+        "The file ends that day, so that month is one day, not a full month. "
+        f"The other months have {int(full_months.signups.min()):,}–{int(full_months.signups.max()):,} signups each. "
+        "Do not read that short month as a drop."
     )
 elif len(thin):
     edge_line = (
@@ -243,4 +246,4 @@ To get the revenue, join billing charges to these `{python} num(n)` accounts. Ea
 
 ### QA
 
-**Data quality.** The file is clean enough for the big picture: `{python} num(nar.n_distinct)` unique accounts, `{python} pattern_line`, and `{python} call_line`. It is not clean enough to treat every purchase as the credit working. `{python} num(buy_no_act)` buyers never called the API. `{python} num(first_after_buy)` called the API only after the purchase date. `{python} edge_line`
+**Data quality.** The file is clean enough for the big picture: `{python} num(nar.n_distinct)` unique accounts, `{python} pattern_line`, and `{python} call_line`. `{python} num(buy_no_act)` buyers never called the API. `{python} num(first_after_buy)` called the API only after the purchase date. `{python} edge_line`
