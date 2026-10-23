@@ -10,6 +10,8 @@ format:
       - text: PDF
         icon: file-pdf
         href: executive-summary.pdf
+      # A format name here stops Quarto from also adding a Typst link.
+      - pdf-only
   typst:
     toc: false
 ---
